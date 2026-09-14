@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora:wght@400;700&display=swap');
-
 /* ==========================
    1. RESET
    ========================== */
@@ -23,48 +21,50 @@ img {
    ========================== */
 :root {
     /* Color */
-    --color-bg: #fafafa;
-    --color-surface: #ffffff;
-    --color-surface-alt: #f1f5f9;
-    --color-text: #1f2937;
-    --color-muted: #4b5563;
     --color-accent: #4d1979;
     --color-accent-strong: #321052;
-    --color-border: #e5e7eb;
+    --color-text: #172033;
+    --color-muted: #657186;
+    --color-border: #d9dfeb;
+    --color-bg: #f7f8fb;
+    --color-surface: #ffffff;
 
     /* Spacing */
+    --space-xs: 0.25rem;
     --space-sm: 0.5rem;
     --space-md: 1rem;
     --space-lg: 1.5rem;
     --space-xl: 2rem;
+    --space-2xl: 3rem;
 
     /* Typography */
+    --font-stack: system-ui, 'Segoe UI', Tahoma, sans-serif;
+    --text-sm: 0.875rem;
     --text-base: 1rem;
-    --text-h3: 1.25rem;
+    --text-lg: 1.125rem;
     --text-h2: 1.5rem;
     --text-h1: 2.25rem;
     --leading-body: 1.6;
     --leading-heading: 1.2;
-    --font-stack: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-serif: 'Lora', Georgia, serif;
 
-    /* Layout */
+    /* Structure */
     --page-width: 64rem;
-    --reading-width: 70ch;
-    --radius-md: 8px;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --radius-sm: 5px;
+    --radius-md: 10px;
+    --shadow-sm: 0 2px 8px rgba(23, 32, 51, 0.08);
+    --transition: 0.2s ease;
 }
 
 
 /* ==========================
-   3. BASE
+   3. BASE ELEMENT STYLES
    ========================== */
 body {
-    background-color: var(--color-bg);
-    color: var(--color-text);
+    font-family: var(--font-stack);
     font-size: var(--text-base);
     line-height: var(--leading-body);
-    font-family: var(--font-stack);
+    color: var(--color-text);
+    background-color: var(--color-bg);
 }
 
 h1 {
@@ -75,56 +75,38 @@ h1 {
 h2 {
     font-size: var(--text-h2);
     line-height: var(--leading-heading);
-}
-
-h3 {
-    font-size: var(--text-h3);
-    line-height: var(--leading-heading);
-}
-
-h1,
-h2,
-h3 {
-    font-family: var(--font-serif);
-    margin-bottom: var(--space-sm);
-}
-
-p {
     margin-bottom: var(--space-md);
 }
 
-p:last-child {
-    margin-bottom: 0;
+:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
 }
 
 
 /* ==========================
    4. LAYOUT
    ========================== */
-body {
+main {
     max-width: var(--page-width);
     margin: 0 auto;
-    padding: var(--space-lg) var(--space-md);
-}
-
-main {
-    margin-top: var(--space-lg);
+    padding: var(--space-xl) var(--space-lg);
 }
 
 
 /* ==========================
    5. HEADER
    ========================== */
-header {
-    padding: var(--space-xl);
+.site-header {
     background-color: var(--color-accent);
     color: var(--color-surface);
-    border-radius: var(--radius-md);
+    padding: var(--space-2xl) var(--space-lg);
     text-align: center;
 }
 
-header p {
-    color: var(--color-surface);
+.tagline {
+    font-size: var(--text-lg);
+    margin-top: var(--space-sm);
 }
 
 
@@ -135,11 +117,11 @@ header p {
 .controls-section,
 .favorites-section {
     background-color: var(--color-surface);
-    padding: var(--space-lg);
-    margin-bottom: var(--space-xl);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-sm);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-xl);
 }
 
 
@@ -152,25 +134,31 @@ header p {
 
 label {
     display: block;
-    margin-bottom: var(--space-sm);
     font-weight: 600;
+    margin-bottom: var(--space-xs);
 }
 
 input,
 select,
 textarea {
     width: 100%;
-    padding: var(--space-sm);
-    font-family: var(--font-stack);
-    font-size: var(--text-base);
+    font: inherit;
     color: var(--color-text);
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-md);
+    transition: border-color var(--transition);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--color-accent);
 }
 
 textarea {
-    min-height: 6rem;
+    resize: vertical;
 }
 
 
@@ -178,12 +166,13 @@ textarea {
    8. BUTTONS
    ========================== */
 .btn {
-    padding: var(--space-sm) var(--space-md);
-    font-family: var(--font-stack);
-    font-size: var(--text-base);
+    font: inherit;
+    font-weight: 600;
     border: none;
-    border-radius: var(--radius-md);
+    border-radius: var(--radius-sm);
+    padding: var(--space-sm) var(--space-lg);
     cursor: pointer;
+    transition: background-color var(--transition);
 }
 
 .btn-primary {
@@ -199,9 +188,14 @@ textarea {
 /* ==========================
    9. SEARCH
    ========================== */
-.controls-section {
-    display: grid;
-    gap: var(--space-sm);
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.control-group {
+    flex: 1;
 }
 
 
@@ -216,23 +210,38 @@ textarea {
 
 .empty-message {
     color: var(--color-muted);
+    font-style: italic;
 }
 
 
 /* ==========================
    11. FOOTER
    ========================== */
-footer {
+.site-footer {
     text-align: center;
     color: var(--color-muted);
+    font-size: var(--text-sm);
+    border-top: 1px solid var(--color-border);
     padding: var(--space-lg);
 }
 
 
 /* ==========================
    12. RESPONSIVE
+   Breakpoint: 768px — tablet and larger
    ========================== */
 @media (min-width: 768px) {
+    .add-section,
+    .controls-section,
+    .favorites-section {
+        padding: var(--space-xl);
+    }
+
+    .controls {
+        flex-direction: row;
+        gap: var(--space-lg);
+    }
+
     .favorites-grid {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
