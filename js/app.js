@@ -1,6 +1,6 @@
 const favoritePlace = {
   name: "Press Cafe",
-  category: "restaurants",
+  category: "restaurant",
   rating: 5,
   notes: "Great patio and brunch",
   dateAdded: new Date().toLocaleDateString()
