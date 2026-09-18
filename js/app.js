@@ -1,6 +1,6 @@
 const favoritePlace = {
   name: "Press Cafe",
-  category: "restaurant",
+  category: "restaurants",
   rating: 5,
   notes: "Great patio and brunch",
   dateAdded: new Date().toLocaleDateString()
@@ -27,4 +27,21 @@ console.log(typeof favoritePlace.notes);
 console.log(typeof favoritePlace.dateAdded);
 console.log("⭐".repeat(favoritePlace.rating));
 console.log(favoritePlace.name + " - " + "⭐".repeat(favoritePlace.rating));
+
+function greetFavorite(placeName, rating) {
+    console.log(placeName + ' has ' + rating + ' stars!');
+}
+greetFavorite('Starbucks', 5);   // "Starbucks has 5 stars!"
+
+const nameInput = document.getElementById('name');
+console.log(nameInput.value);   // what the user typed
+
+const practiceForm = document.getElementById('add-favorite-form');
+
+function handleSubmit(event) {
+    event.preventDefault();   // stop the page reload
+    console.log('You typed: ' + nameInput.value);
+}
+
+practiceForm.addEventListener('submit', handleSubmit);
 
