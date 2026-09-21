@@ -1,47 +1,62 @@
-const favoritePlace = {
-  name: "Press Cafe",
-  category: "restaurants",
-  rating: 5,
-  notes: "Great patio and brunch",
-  dateAdded: new Date().toLocaleDateString()
-};
+let favorites = [];
 
-console.log(favoritePlace);
+const form = document.getElementById("add-favorite-form");
+const favoritesList = document.getElementById("favorites-list");
 
-console.log(favoritePlace.name);
-console.log(favoritePlace.category);
-console.log(favoritePlace.rating);
-console.log(favoritePlace.notes);
-console.log(favoritePlace.dateAdded);
+function addFavorite(event) {
 
-console.log(
-  favoritePlace.name + " - " +
-  favoritePlace.category + " - " +
-  favoritePlace.rating + " stars"
-);
+  event.preventDefault();
 
-console.log(typeof favoritePlace.name);
-console.log(typeof favoritePlace.category);
-console.log(typeof favoritePlace.rating);
-console.log(typeof favoritePlace.notes);
-console.log(typeof favoritePlace.dateAdded);
-console.log("⭐".repeat(favoritePlace.rating));
-console.log(favoritePlace.name + " - " + "⭐".repeat(favoritePlace.rating));
+  const name = document.getElementById("name").value.trim();
+  const category = document.getElementById("category").value;
+  const rating = parseInt(document.getElementById("rating").value);
+  const notes = document.getElementById("notes").value.trim();
 
-function greetFavorite(placeName, rating) {
-    console.log(placeName + ' has ' + rating + ' stars!');
-}
-greetFavorite('Starbucks', 5);   // "Starbucks has 5 stars!"
+  if (!name || !category) {
+    return;
+  }
 
-const nameInput = document.getElementById('name');
-console.log(nameInput.value);   // what the user typed
+  const favorite = {
+    name: name,
+    category: category,
+    rating: rating,
+    notes: notes
+  };
 
-const practiceForm = document.getElementById('add-favorite-form');
+  favorites.push(favorite);
 
-function handleSubmit(event) {
-    event.preventDefault();   // stop the page reload
-    console.log('You typed: ' + nameInput.value);
+  form.reset();
+
+  displayFavorites();
 }
 
-practiceForm.addEventListener('submit', handleSubmit);
+function displayFavorites() {
 
+  favoritesList.innerHTML = "";
+
+  if (favorites.length === 0) {
+
+    favoritesList.innerHTML =
+      '<p class="empty-message">No favorites yet. Add your first favorite place above!</p>';
+
+    return;
+  }
+
+  favorites.forEach(function(favorite) {
+
+    favoritesList.innerHTML += `
+      <article class="favorite-card">
+        <h3>${favorite.name}</h3>
+        <p>Category: ${favorite.category}</p>
+        <p>Rating: ${"⭐".repeat(favorite.rating)}</p>
+        <p>${favorite.notes}</p>
+      </article>
+    `;
+
+  });
+
+}
+
+form.addEventListener("submit", addFavorite);
+
+displayFavorites();
