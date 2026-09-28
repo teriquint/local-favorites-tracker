@@ -27,7 +27,7 @@ function addFavorite(event) {
   };
 
   favorites.push(favorite);
-
+  saveFavorites();
   form.reset();
 
   displayFavorites();
@@ -37,6 +37,7 @@ function deleteFavorite(index) {
 
   if (confirm(`Delete "${favorite.name}"?`)) {
     favorites.splice(index, 1);
+    saveFavorites();
     searchFavorites();
   }
 }
@@ -88,10 +89,31 @@ function displayFavorites() {
   categoryFilter.value = 'all';
   searchFavorites();
 }
+function saveFavorites() {
+  try {
+    localStorage.setItem('localFavorites', JSON.stringify(favorites));
+  } catch (error) {
+    alert('Unable to save favorites. Storage may be disabled.');
+  }
+}
 
+function loadFavorites() {
+  try {
+    const saved = localStorage.getItem('localFavorites');
+
+    if (saved) {
+      favorites = JSON.parse(saved);
+    } else {
+      favorites = [];
+    }
+  } catch (error) {
+    favorites = [];
+  }
+}
 form.addEventListener("submit", addFavorite);
 
 searchInput.addEventListener('input', searchFavorites);
 categoryFilter.addEventListener('change', searchFavorites);
 
+loadFavorites();
 displayFavorites();
