@@ -57,28 +57,43 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Add Favorite</button>
-
+                <button type="button" id="clear-all" class="btn-danger">
+                Clear All Favorites
+                </button>
             </form>
         </section>
 
         <section class="controls-section">
-            <label for="search-input">Search favorites</label>
-            <input type="search" id="search-input" placeholder="Search names and notes">
+    <label for="search-input">Search favorites</label>
+    <input type="search" id="search-input" placeholder="Search names and notes">
 
-            <label for="category-filter">Filter by category</label>
-            <select id="category-filter">
-                <option value="all">All categories</option>
-                <option value="restaurants">Restaurant</option>
-                <option value="coffee">Coffee</option>
-                <option value="shopping">Shopping</option>
-                <option value="entertainment">Entertainment</option>
-                <option value="outdoors">Outdoors</option>
-            </select>
+    <label for="category-filter">Filter by category</label>
+    <select id="category-filter">
+        <option value="all">All categories</option>
+        <option value="restaurants">Restaurant</option>
+        <option value="coffee">Coffee</option>
+        <option value="shopping">Shopping</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="outdoors">Outdoors</option>
+    </select>
+
+    <label for="rating-filter">Filter by rating</label>
+    <select id="rating-filter">
+        <option value="all">All ratings</option>
+        <option value="5">5 stars</option>
+        <option value="4">4 stars</option>
+        <option value="3">3 stars</option>
+        <option value="2">2 stars</option>
+        <option value="1">1 star</option>
+    </select>
+
         </section>
 
         <section class="favorites-section">
+            <p id="favorites-count"></p>
+
             <div id="favorites-list" class="favorites-grid">
-                </div>
+            </div>
         </section>
 
     </main>
