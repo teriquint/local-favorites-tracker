@@ -149,3 +149,4 @@ ratingFilter.addEventListener('change', searchFavorites);
 
 loadFavorites();
 displayFavorites();
+
